@@ -1,0 +1,10 @@
+<mat-grid-list cols="4" rowHeight="84px">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
+        [style.background]="tile.color">
+        {{tile.text}}
+        <ng-container *ngIf="!tile.text">
+            <app-flamelink-image [fileReference]="personalInformation?.picture"></app-flamelink-image>
+        </ng-container>
+    </mat-grid-tile>
+</mat-grid-list>
+

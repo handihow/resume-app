@@ -1,1 +1,5 @@
-<app-dashboard></app-dashboard>
+<ng-container [ngSwitch]="state">
+    <app-loading-indicator *ngSwitchCase="'loading'"></app-loading-indicator>
+    <app-dashboard [content]="content" *ngSwitchCase="'done'"></app-dashboard>
+    <app-error-message [errorMsg]="errorMsg" *ngSwitchCase="'error'"></app-error-message>
+</ng-container>

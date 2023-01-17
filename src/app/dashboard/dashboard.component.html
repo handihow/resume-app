@@ -1,7 +1,8 @@
-<div class="grid-container">
-  <h1 class="mat-h1">My Online Resume</h1>
+<mat-toolbar class="mat-elevation-z2">My Online Resume</mat-toolbar>
+<div class="grid-container">  
   <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows"
+      [ngSwitch]="card.title">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
@@ -9,7 +10,10 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+          <app-personal-info *ngSwitchCase="'Personal information'" [personalInformation]="personalInformation"></app-personal-info>
+          <app-education *ngSwitchCase="'Education'" [education]="education"></app-education>
+          <app-work-history *ngSwitchCase="'Work history'" [workHistory]="workHistory"></app-work-history>
+          <app-skills *ngSwitchCase="'Skills'" [skills]="skills"></app-skills>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
