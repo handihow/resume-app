@@ -1,1 +1,4 @@
-<img [src]="downloadUrl" class="avatar-image" *ngIf="downloadUrl">
+<img [src]="downloadUrl$ | async" class="avatar-image" *ngIf="downloadUrl$ | async;else loading">
+<ng-template #loading>
+    <app-loading-indicator></app-loading-indicator>
+</ng-template>

@@ -8,5 +8,6 @@ import { Education } from '../models/education.model';
 })
 export class EducationComponent {
   @Input() education: Education[] = [];
+  @Input() isSmallScreen : boolean | null = false;
 
 }

@@ -8,6 +8,7 @@ import { WorkHistory, Achievement } from '../models/work-history.model';
 })
 export class WorkHistoryComponent {
   @Input() workHistory: WorkHistory[] = [];
+  @Input() isSmallScreen : boolean | null = false;
 
   listAchievements(achievements: Achievement[]) {
     return achievements.map(a => a.achievement).join(', ');

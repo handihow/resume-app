@@ -38,6 +38,9 @@ export class DashboardComponent implements OnInit {
   education: Education[] = [];
   workHistory: WorkHistory[] = [];
   skills: Skill[] = [];
+  isSmallScreen$ = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(({ matches }) => { return matches }));
 
   constructor(private breakpointObserver: BreakpointObserver) { }
 

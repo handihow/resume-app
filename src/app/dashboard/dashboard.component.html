@@ -10,9 +10,16 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <app-personal-info *ngSwitchCase="'Personal information'" [personalInformation]="personalInformation"></app-personal-info>
-          <app-education *ngSwitchCase="'Education'" [education]="education"></app-education>
-          <app-work-history *ngSwitchCase="'Work history'" [workHistory]="workHistory"></app-work-history>
+          <app-personal-info *ngSwitchCase="'Personal information'" 
+            [personalInformation]="personalInformation"
+            [isSmallScreen]="isSmallScreen$ | async"></app-personal-info>
+          <app-education *ngSwitchCase="'Education'" 
+            [education]="education"
+            [isSmallScreen]="isSmallScreen$ | async"></app-education>
+          <app-work-history *ngSwitchCase="'Work history'" 
+            [workHistory]="workHistory"
+            [isSmallScreen]="isSmallScreen$ | async"
+            ></app-work-history>
           <app-skills *ngSwitchCase="'Skills'" [skills]="skills"></app-skills>
         </mat-card-content>
       </mat-card>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, getDocs, collection, DocumentData } from '@angular/fire/firestore';
+import { DocumentData } from '@angular/fire/firestore';
+import { FlamelinkService } from './flamelink.service';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +12,19 @@ export class AppComponent implements OnInit {
   state: 'loading' | 'done' | 'error' = 'loading'
   errorMsg = '';
 
-  constructor(private firestore: Firestore) { }
+  constructor(private flService: FlamelinkService) { }
 
   ngOnInit(): void {
     this.getContent();
   }
 
-  async getContent() {
-    try {
-      const fl_content = collection(this.firestore, 'fl_content');
-      const snap = await getDocs(fl_content);
-      this.content = snap.docs.map(d => d.data());
+  async getContent(){
+    const [content, errorMsg] = await this.flService.getContent();
+    if(content) {
+      this.content = content;
       this.state = 'done';
-    } catch (error: any) {
-      this.errorMsg = error.message;
+    } else if(errorMsg) {
+      this.errorMsg = errorMsg;
       this.state = 'error';
     }
   }

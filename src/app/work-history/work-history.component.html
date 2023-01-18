@@ -1,8 +1,12 @@
 <mat-list>
     <mat-list-item *ngFor="let item of workHistory">
         <mat-icon matListItemIcon [matTooltip]="listAchievements(item.achievements)">info</mat-icon>
-       <h4 matListItemTitle>{{item.jobTitle}}</h4>
-       <p matListItemLine> {{item.company}} </p>
-       <p matListItemMeta>{{item.from}} - {{item.to}}</p>
+        <h4 matListItemTitle>{{item.jobTitle}}</h4>
+        <p matListItemLine>
+            <span *ngIf="isSmallScreen">
+                {{item.from}} - {{item.to}} | </span>{{item.company}}
+        </p>
+        <p matListItemMeta *ngIf="!isSmallScreen">
+            {{item.from}} - {{item.to}}</p>
     </mat-list-item>
- </mat-list>
+</mat-list>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DocumentReference, getDoc } from '@angular/fire/firestore';
-import { getDownloadURL, ref, Storage } from '@angular/fire/storage';
+import { DocumentReference } from '@angular/fire/firestore';
+import { FlamelinkService } from '../flamelink.service';
 
 @Component({
   selector: 'app-flamelink-image',
@@ -9,26 +9,12 @@ import { getDownloadURL, ref, Storage } from '@angular/fire/storage';
 })
 export class FlamelinkImageComponent implements OnInit {
   @Input() fileReference: DocumentReference[] | undefined;
-  downloadUrl = '';
+  downloadUrl$: Promise<string | undefined> | undefined;
   
-  constructor(private storage: Storage) { }
+  constructor(private flService: FlamelinkService) { }
 
   ngOnInit(): void {
-    this.getFileDocument();
+    this.downloadUrl$ = this.flService.getDownloadUrl(this.fileReference);
   }
-
-  async getFileDocument() {
-    if(!this.fileReference) return;
-    const doc = await getDoc(this.fileReference[0]);
-    const data = doc.exists() ? doc.data() : undefined;
-    if(!data) return;
-    this.getDownloadUrlFromFileReference(data['file']);
-  }
-
-
-  async getDownloadUrlFromFileReference(fileName: string) {
-    const fileRef = ref(this.storage, 'flamelink/media/' + fileName);
-    this.downloadUrl = await getDownloadURL(fileRef);
-    console.log(this.downloadUrl);
-  }
+  
 }

@@ -1,8 +1,12 @@
 <mat-list>
     <mat-list-item *ngFor="let item of education">
         <mat-icon matListItemIcon [matTooltip]="item.remarks">info</mat-icon>
-       <h4 matListItemTitle>{{item.title}}</h4>
-       <p matListItemLine> {{item.institution}} </p>
-       <p matListItemMeta>{{item.from}} - {{item.to}}</p>
+        <h4 matListItemTitle>{{item.title}}</h4>
+        <p matListItemLine>
+            <span *ngIf="isSmallScreen">{{item.from}} - {{item.to}} | </span>
+            {{item.institution}}
+        </p>
+        <p matListItemMeta *ngIf="!isSmallScreen">
+            {{item.from}} - {{item.to}}</p>
     </mat-list-item>
- </mat-list>
+</mat-list>
